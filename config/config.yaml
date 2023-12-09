@@ -12,3 +12,8 @@ data_ingestion:
 model:
   model_dir: artifacts/model
   model_path: artifacts/model/my_model.h5
+
+callbacks:
+  root_dir: artifacts/callbacks
+  tensorboard_root_log_dir: artifacts/callbacks/tensorboard_log_dir
+  checkpoint_model_filepath: artifacts/callbacks/checkpoint_dir/model.h5
