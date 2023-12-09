@@ -7,3 +7,8 @@ data_ingestion:
   unzip_dir: artifacts/data_ingestion/Train/
   data_dir: artifacts/data_ingestion/Train/Train
   csv_dir: artifacts/data_ingestion/Train/train_data.csv
+
+
+model:
+  model_dir: artifacts/model
+  model_path: artifacts/model/my_model.h5
