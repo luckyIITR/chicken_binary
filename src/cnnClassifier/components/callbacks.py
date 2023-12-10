@@ -7,24 +7,28 @@ from cnnClassifier.entity.config_entity import CallbacksConfig
 
 
 class MyCallback(keras.callbacks.Callback):
-    def __init__(self, model, patience, stop_patience, threshold, factor, batches, epochs, ask_epoch):
+    def __init__(self, model, train_gen, config: CallbacksConfig):
         super(MyCallback, self).__init__()
+        self.config = config
+
         self.model = model
-        self.patience = patience  # specifies how many epochs without improvement before learning rate is adjusted
-        self.stop_patience = stop_patience  # specifies how many times to adjust lr without improvement to stop training
-        self.threshold = threshold  # specifies training accuracy threshold when lr will be adjusted based on validation loss
-        self.factor = factor  # factor by which to reduce the learning rate
-        self.batches = batches  # number of training batch to run per epoch
-        self.epochs = epochs
-        self.ask_epoch = ask_epoch
-        self.ask_epoch_initial = ask_epoch  # save this value to restore if restarting training
+        self.patience = config.patience  # specifies how many epochs without improvement before learning rate is adjusted
+        self.stop_patience = config.stop_patience  # specifies how many times to adjust lr without improvement to stop training
+        self.threshold = config.threshold  # specifies training accuracy threshold when lr will be adjusted based on validation loss
+        self.factor = config.factor  # factor by which to reduce the learning rate
+        self.epochs = config.epochs
+        self.ask_epoch = config.ask_epoch
+        self.ask_epoch_initial = config.ask_epoch  # save this value to restore if restarting training
+
+        self.batches = int(
+            np.ceil(len(train_gen.labels) / config.batch_size))  # number of training batch to run per epoch
 
         # callback variables
         self.count = 0  # how many times lr has been reduced without improvement
         self.stop_count = 0
         self.best_epoch = 1  # epoch with the lowest loss
         self.initial_lr = float(
-            keras.backend.get_value(model.optimizer.lr))  # get the initial learning rate and save it
+            tf.keras.backend.get_value(model.optimizer.lr))  # get the initial learning rate and save it
         self.highest_tracc = 0.0  # set highest training accuracy to 0 initially
         self.lowest_vloss = np.inf  # set lowest validation loss to infinity initially
         self.best_weights = self.model.get_weights()  # set best weights to model's initial weights
@@ -34,7 +38,7 @@ class MyCallback(keras.callbacks.Callback):
     def on_train_begin(self, logs=None):
         msg = 'Do you want model asks you to halt the training [y/n] ?'
         print(msg)
-        ans = input('')
+        ans = 'n'  # can take input from user
         if ans in ['Y', 'y']:
             self.ask_permission = 1
         elif ans in ['N', 'n']:

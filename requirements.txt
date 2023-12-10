@@ -13,5 +13,7 @@ joblib
 types-PyYAML
 scipy
 Flask
+scikit-learn
+dill
 Flask-Cors
 -e .

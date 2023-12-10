@@ -1,6 +1,6 @@
 from cnnClassifier.utils.common import create_directories, read_yaml
 from cnnClassifier.constants import *
-from cnnClassifier.entity.config_entity import DataIngestionConfig, ModelConfig, CallbacksConfig
+from cnnClassifier.entity.config_entity import DataIngestionConfig, BaseModelConfig, CallbacksConfig
 import os
 
 
@@ -32,30 +32,22 @@ class ConfigurationManager:
 
         return data_ingestion_config
 
-    def get_model_config(self) -> ModelConfig:
-        config = self.config.model
+    def get_base_model_config(self) -> BaseModelConfig:
+        config = self.config.base_model
         params_config = self.params
 
-        create_directories([config.model_dir])
+        create_directories([config.base_model_dir])
 
-        model_config = ModelConfig(
-            model_dir=Path(config.model_dir),
-            model_path=Path(config.model_path),
+        base_model_config = BaseModelConfig(
+            base_model_dir=Path(config.base_model_dir),
+            base_model_path=Path(config.base_model_path),
             img_size=params_config.img_size,
             channels=params_config.channels,
-            batch_size=params_config.batch_size,  # set batch size for training
-            epochs=params_config.epochs,  # number of all epochs in training
-            patience=params_config.patience,
-            # number of epochs to wait to adjust lr if monitored value does not improve
-            stop_patience=params_config.stop_patience,
-            # number of epochs to wait before stopping training if monitored value does not improve
-            threshold=params_config.threshold,
-            # if train accuracy is < threshold adjust monitor accuracy, else monitor validation loss
-            factor=params_config.factor,  # factor to reduce lr by
-            ask_epoch=params_config.ask_epoch  #
+            loss=params_config.loss,
+            learning_rate=params_config.learning_rate
         )
 
-        return model_config
+        return base_model_config
 
     def get_callback_config(self) -> CallbacksConfig:
         config = self.config.callbacks
@@ -70,11 +62,10 @@ class ConfigurationManager:
             root_dir=Path(config.root_dir),
             tensorboard_root_log_dir=Path(config.tensorboard_root_log_dir),
             checkpoint_model_filepath=Path(config.checkpoint_model_filepath),
-            img_size=param_config.img_size,
-            channels=param_config.channels,
             batch_size=param_config.batch_size,  # set batch size for training
             epochs=param_config.epochs,  # number of all epochs in training
-            patience=param_config.patience,  # number of epochs to wait to adjust lr if monitored value does not improve
+            patience=param_config.patience,  # number of epochs to wait to adjust lr if monitored value does not
+            # improve
             stop_patience=param_config.stop_patience,
             # number of epochs to wait before stopping training if monitored value does not improve
             threshold=param_config.threshold,
@@ -84,3 +75,4 @@ class ConfigurationManager:
         )
 
         return callback_config
+

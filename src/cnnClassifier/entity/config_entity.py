@@ -13,18 +13,13 @@ class DataIngestionConfig:
 
 
 @dataclass(frozen=True)
-class ModelConfig:
-    model_dir: Path
-    model_path: Path
+class BaseModelConfig:
+    base_model_dir: Path
+    base_model_path: Path
     img_size: list
     channels: int
-    batch_size: int  # set batch size for training
-    epochs: int  # number of all epochs in training
-    patience: int  # number of epochs to wait to adjust lr if monitored value does not improve
-    stop_patience: int  # number of epochs to wait before stopping training if monitored value does not improve
-    threshold: float  # if train accuracy is < threshold adjust monitor accuracy, else monitor validation loss
-    factor: float  # factor to reduce lr by
-    ask_epoch: int  # number of epochs to run before asking if you want to halt training
+    loss: str
+    learning_rate: float
 
 
 @dataclass(frozen=True)
@@ -32,12 +27,12 @@ class CallbacksConfig:
     root_dir: Path
     tensorboard_root_log_dir: Path
     checkpoint_model_filepath: Path
-    img_size: list
-    channels: int
+
     batch_size: int  # set batch size for training
     epochs: int  # number of all epochs in training
     patience: int  # number of epochs to wait to adjust lr if monitored value does not improve
     stop_patience: int  # number of epochs to wait before stopping training if monitored value does not improve
     threshold: float  # if train accuracy is < threshold adjust monitor accuracy, else monitor validation loss
     factor: float  # factor to reduce lr by
-    ask_epoch: int  # number of epochs to run before asking if you want to halt training
+    ask_epoch: int
+

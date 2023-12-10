@@ -1,5 +1,5 @@
 from cnnClassifier.config.configuration import ConfigurationManager
-from cnnClassifier.components.PrepareModel import PrepareModel
+from cnnClassifier.components.PrepareBaseModel import PrepareBaseModel
 from cnnClassifier import logger
 
 STAGE_NAME = "Prepare model"
@@ -12,8 +12,8 @@ class PrepareModelTrainingPipeline:
     @staticmethod
     def main():
         config = ConfigurationManager()
-        model_config = config.get_model_config()
-        model_obj = PrepareModel(config=model_config)
+        model_config = config.get_base_model_config()
+        model_obj = PrepareBaseModel(config=model_config)
         model_obj.prepare_model()
 
 

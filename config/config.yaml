@@ -9,11 +9,19 @@ data_ingestion:
   csv_dir: artifacts/data_ingestion/Train/train_data.csv
 
 
-model:
-  model_dir: artifacts/model
-  model_path: artifacts/model/my_model.h5
+base_model:
+  base_model_dir: artifacts/base_model
+  base_model_path: artifacts/base_model/base_model.h5
 
 callbacks:
   root_dir: artifacts/callbacks
   tensorboard_root_log_dir: artifacts/callbacks/tensorboard_log_dir
   checkpoint_model_filepath: artifacts/callbacks/checkpoint_dir/model.h5
+
+training:
+  root_dir: artifacts/training
+  trained_model_path: artifacts/training/trained_model.h5
+  base_model_path: artifacts/base_model/base_model.h5
+  data_dir: artifacts/data_ingestion/Train/Train
+  csv_dir: artifacts/data_ingestion/Train/train_data.csv
+  data_gen_path: artifacts/training
