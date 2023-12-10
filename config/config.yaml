@@ -25,3 +25,8 @@ training:
   data_dir: artifacts/data_ingestion/Train/Train
   csv_dir: artifacts/data_ingestion/Train/train_data.csv
   data_gen_path: artifacts/training
+
+
+evaluation:
+  trained_model_path: artifacts/training/trained_model.keras
+  dataframe_path: artifacts/training

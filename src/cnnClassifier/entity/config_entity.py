@@ -52,3 +52,14 @@ class TrainingConfig:
     data_gen_path: Path  # to save the data generators
     learning_rate: int
     loss: str
+
+
+@dataclass(frozen=True)
+class EvaluationConfig:
+    trained_model_path: Path
+    dataframe_path: Path
+    test_batch_size: int
+    batch_size: int
+    img_size: list
+    channels: int
+    color: str
