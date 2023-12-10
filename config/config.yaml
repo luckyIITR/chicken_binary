@@ -11,17 +11,17 @@ data_ingestion:
 
 base_model:
   base_model_dir: artifacts/base_model
-  base_model_path: artifacts/base_model/base_model.h5
+  base_model_path: artifacts/base_model/base_model.keras
 
 callbacks:
   root_dir: artifacts/callbacks
   tensorboard_root_log_dir: artifacts/callbacks/tensorboard_log_dir
-  checkpoint_model_filepath: artifacts/callbacks/checkpoint_dir/model.h5
+  checkpoint_model_filepath: artifacts/callbacks/checkpoint_dir/model.keras
 
 training:
   root_dir: artifacts/training
-  trained_model_path: artifacts/training/trained_model.h5
-  base_model_path: artifacts/base_model/base_model.h5
+  trained_model_path: artifacts/training/trained_model.keras
+  base_model_path: artifacts/base_model/base_model.keras
   data_dir: artifacts/data_ingestion/Train/Train
   csv_dir: artifacts/data_ingestion/Train/train_data.csv
   data_gen_path: artifacts/training

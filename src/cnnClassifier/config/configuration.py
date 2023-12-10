@@ -1,6 +1,6 @@
 from cnnClassifier.utils.common import create_directories, read_yaml
 from cnnClassifier.constants import *
-from cnnClassifier.entity.config_entity import DataIngestionConfig, BaseModelConfig, CallbacksConfig
+from cnnClassifier.entity.config_entity import DataIngestionConfig, BaseModelConfig, CallbacksConfig, TrainingConfig
 import os
 
 
@@ -76,3 +76,29 @@ class ConfigurationManager:
 
         return callback_config
 
+    def get_training_config(self) -> TrainingConfig:
+        training = self.config.training
+        params = self.params
+
+        training_data = os.path.join(self.config.data_ingestion.unzip_dir, "Chicken-fecal-images")
+        create_directories([
+            Path(training.root_dir)
+        ])
+
+        training_config = TrainingConfig(
+            root_dir=Path(training.root_dir),
+            trained_model_path=Path(training.trained_model_path),
+            base_model_path=Path(training.base_model_path),
+            data_dir=Path(training.data_dir),
+            csv_dir=Path(training.csv_dir),
+            data_gen_path=Path(training.data_gen_path),
+            img_size=params.img_size,
+            channels=params.channels,
+            color=params.color,
+            epochs=params.epochs,
+            batch_size=params.batch_size,
+            learning_rate=params.learning_rate,
+            loss=params.loss,
+        )
+
+        return training_config

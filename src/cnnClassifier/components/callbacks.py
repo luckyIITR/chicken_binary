@@ -36,8 +36,8 @@ class MyCallback(keras.callbacks.Callback):
 
     # Define a function that will run when train begins
     def on_train_begin(self, logs=None):
-        msg = 'Do you want model asks you to halt the training [y/n] ?'
-        print(msg)
+        # msg = 'Do you want model asks you to halt the training [y/n] ?'
+        # print(msg)
         ans = 'n'  # can take input from user
         if ans in ['Y', 'y']:
             self.ask_permission = 1

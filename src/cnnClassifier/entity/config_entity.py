@@ -36,3 +36,19 @@ class CallbacksConfig:
     factor: float  # factor to reduce lr by
     ask_epoch: int
 
+
+@dataclass(frozen=True)
+class TrainingConfig:
+    root_dir: Path
+    trained_model_path: Path  # to store the trained model
+    base_model_path: Path  # load the base model
+    data_dir: Path  # load data and csv
+    csv_dir: Path
+    img_size: list
+    channels: int
+    color: str
+    epochs: int
+    batch_size: int
+    data_gen_path: Path  # to save the data generators
+    learning_rate: int
+    loss: str
