@@ -112,7 +112,7 @@ async def login(request: Request, db: Session = Depends(get_db)):
     try:
         form = LoginForm(request)
         await form.create_oauth_form()
-        response = RedirectResponse(url="/todos", status_code=status.HTTP_302_FOUND)
+        response = RedirectResponse(url="/chicken-binary", status_code=status.HTTP_302_FOUND)
 
         validate_user_cookie = await login_for_access_token(response=response, form_data=form, db=db)
 
