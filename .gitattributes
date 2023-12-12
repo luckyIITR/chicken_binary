@@ -1,0 +1,2 @@
+artifacts/training/trained_model.keras filter=lfs diff=lfs merge=lfs -text
+artifacts/data_ingestion/data.zip filter=lfs diff=lfs merge=lfs -text
