@@ -14,8 +14,9 @@ from fastapi.templating import Jinja2Templates
 import os
 import asyncio
 import subprocess
-
 from cnnClassifier.utils.common import decodeImage
+log_file_path = 'logs/running_logs.log'
+
 
 router = APIRouter(
     prefix="/chicken-binary",
@@ -51,7 +52,8 @@ async def predict(request: Request, image: UploadFile = File(...)):
     encoded_image = base64.b64encode(contents).decode('utf-8')
     # print(result)
     return templates.TemplateResponse("home.html",
-                                      {"request": request, 'user': user,'result': result['result'], 'image_data': encoded_image})
+                                      {"request": request, 'user': user, 'result': result['result'],
+                                       'image_data': encoded_image})
 
 
 # Keep track of the task status, you might use a database or in-memory storage
@@ -74,6 +76,7 @@ async def execute_long_running_task():
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE
     )
+
     await process.communicate()
 
     task_status = "completed"
@@ -100,3 +103,18 @@ async def train_model(request: Request):
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
     return templates.TemplateResponse('admin.html', {"request": request, 'user': user})
+
+
+def read_logs(file_path):
+    with open(file_path, 'r') as file:
+        logs = file.readlines()
+    return logs
+
+
+@router.get('/logs')
+async def get_logs(request: Request):
+    user = await get_current_user(request)
+    if user is None:
+        return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
+    logs = read_logs(log_file_path)
+    return templates.TemplateResponse('logs.html', {'request': request, 'logs': logs, 'user' : user})

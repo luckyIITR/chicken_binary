@@ -1,8 +1,8 @@
 {
-    "Train Loss": 52.06542205810547,
-    "Train Accuracy:": 0.8083333373069763,
-    "Validation Loss": 44.36037826538086,
-    "Validation Accuracy:": 0.8270833492279053,
-    "Test Loss": 41.82638168334961,
-    "Test Accuracy:": 0.8291666507720947
+    "Train Loss": 0.15962466597557068,
+    "Train Accuracy:": 0.9375,
+    "Validation Loss": 0.12286148965358734,
+    "Validation Accuracy:": 0.9541666507720947,
+    "Test Loss": 0.15191341936588287,
+    "Test Accuracy:": 0.9291666746139526
 }

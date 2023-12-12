@@ -3,7 +3,7 @@ channels : 3
 loss : binary_crossentropy
 learning_rate : 0.001
 batch_size : 40   # set batch size for training
-epochs : 1   # number of all epochs in training
+epochs : 5   # number of all epochs in training
 patience : 1   #number of epochs to wait to adjust lr if monitored value does not improve
 stop_patience : 3   # number of epochs to wait before stopping training if monitored value does not improve
 threshold : 0.9   # if train accuracy is < threshold adjust monitor accuracy, else monitor validation loss

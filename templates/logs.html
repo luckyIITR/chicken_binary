@@ -1,0 +1,10 @@
+{% include 'layout.html' %}
+
+<div class="container mt-4">
+    <h1>Logs</h1>
+    <div class="log-container">
+        {% for log in logs %}
+            <div class="log-entry">{{ log }}</div>
+        {% endfor %}
+    </div>
+</div>

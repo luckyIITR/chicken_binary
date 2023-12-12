@@ -52,8 +52,8 @@ class Evaluation:
         def scalar(img):
             return img
 
-        tr_gen = ImageDataGenerator(preprocessing_function=scalar, horizontal_flip=True)
-        ts_gen = ImageDataGenerator(preprocessing_function=scalar)
+        tr_gen = ImageDataGenerator(preprocessing_function=scalar, horizontal_flip=True, rescale = 1./255)
+        ts_gen = ImageDataGenerator(preprocessing_function=scalar, rescale = 1./255)
 
         train_gen = tr_gen.flow_from_dataframe(train_df, x_col='filepaths', y_col='labels', target_size=img_size,
                                                class_mode="binary",

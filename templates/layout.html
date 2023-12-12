@@ -3,6 +3,20 @@
 <head>
      <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='/chicken_binary/css/base.css') }}">
    <!-- Bootstrap CSS -->
+    <style>
+        .log-container {
+            height: 80vh; /* Set height for the log container */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+        .log-entry {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,5 +36,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
