@@ -1,0 +1,33 @@
+{% include 'layout.html' %}
+
+<div class="container">
+    <h1 class="mt-4">Chicken Disease Classifier</h1>
+
+    <form method="post" enctype="multipart/form-data" class="mt-4">
+        <div class="form-group">
+            <label for="imageUpload">Upload Image</label>
+            <input type="file" class="form-control-file" id="imageUpload" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+
+    {% if result %}
+    <div class="mt-4">
+        <h2>Prediction:</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Display the small uploaded image -->
+                <img src="data:image/jpeg;base64,{{ image_data }}" class="img-fluid" alt="Uploaded Image"
+                     style="max-width: 100px; height: auto;">
+            </div>
+            <div class="col-md-6">
+                <h4>{{ result }}</h4>
+                <!-- Display Bootstrap-styled content here using the result -->
+            </div>
+        </div>
+
+
+    </div>
+    {% endif %}
+</div>

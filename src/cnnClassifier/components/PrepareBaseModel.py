@@ -18,7 +18,7 @@ class PrepareBaseModel:
 
         model = Sequential([
             Conv2D(filters=32, kernel_size=3, activation='relu', input_shape=input_shape),
-            BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001),
+            # BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001),
             MaxPooling2D(pool_size=2, strides=2),
             Conv2D(filters=32, kernel_size=3, activation='relu'),
             MaxPooling2D(pool_size=2, strides=2),
